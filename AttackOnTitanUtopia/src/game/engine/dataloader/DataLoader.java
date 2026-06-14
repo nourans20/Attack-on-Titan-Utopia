@@ -16,6 +16,7 @@ public class DataLoader {
     public static HashMap<Integer, TitanRegistry> readTitanRegistry() throws IOException {
         HashMap<Integer, TitanRegistry> titanRegistry = new HashMap<>();
 
+        @SuppressWarnings("resource")
         BufferedReader br = new BufferedReader(new FileReader(TITANS_FILE_NAME));
         String line;
 
@@ -46,6 +47,7 @@ public class DataLoader {
     public static HashMap<Integer, WeaponRegistry> readWeaponRegistry() throws IOException {
         HashMap<Integer, WeaponRegistry> weaponRegistry = new HashMap<>();
 
+        @SuppressWarnings("resource")
         BufferedReader br = new BufferedReader(new FileReader(WEAPONS_FILE_NAME));
         String line;
 
