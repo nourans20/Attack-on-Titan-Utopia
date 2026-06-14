@@ -78,7 +78,7 @@ public class Lane implements Comparable<Lane> {
         ArrayList<Titan> processed = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             Titan titan = titans.remove();
-            if (!titan.hasReachedTarget())
+            if (titan.hasReachedTarget())
                 resourcesGained += titan.attack(laneWall);
             processed.add(titan);
         }
