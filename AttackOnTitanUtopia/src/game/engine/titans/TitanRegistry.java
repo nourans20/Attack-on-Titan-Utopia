@@ -51,4 +51,26 @@ public class TitanRegistry {
     public int getDangerLevel() {
         return dangerLevel;
     }
+
+    public Titan spawnTitan(int distanceFromBase) {
+
+        Titan titan = null;
+
+        if (code == 1)
+            titan = new PureTitan(baseHealth, baseDamage, heightInMeters, distanceFromBase, speed, resourcesValue,
+                    dangerLevel);
+        else if (code == 2)
+            titan = new AbnormalTitan(baseHealth, baseDamage, heightInMeters, distanceFromBase, speed, resourcesValue,
+                    dangerLevel);
+        else if (code == 3)
+            titan = new ArmoredTitan(baseHealth, baseDamage, heightInMeters, distanceFromBase, speed, resourcesValue,
+                    dangerLevel);
+        else if (code == 4)
+            titan = new ColossalTitan(baseHealth, baseDamage, heightInMeters, distanceFromBase, speed, resourcesValue,
+                    dangerLevel);
+
+        return titan;
+
+    }
+
 }

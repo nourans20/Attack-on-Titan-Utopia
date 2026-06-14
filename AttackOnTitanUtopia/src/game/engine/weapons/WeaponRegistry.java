@@ -62,4 +62,22 @@ public class WeaponRegistry {
     public int getMaxRange() {
         return maxRange;
     }
+
+    public Weapon buildWeapon() {
+
+        Weapon weapon = null;
+
+        if (code == 1)
+            weapon = new PiercingCannon(damage);
+        else if (code == 2)
+            weapon = new SniperCannon(damage);
+        else if (code == 3)
+            weapon = new VolleySpreadCannon(damage, minRange, maxRange);
+        else if (code == 4)
+            weapon = new WallTrap(damage);
+
+        return weapon;
+
+    }
+
 }
