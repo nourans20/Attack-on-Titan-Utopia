@@ -16,4 +16,16 @@ public interface Attackee {
 
     public int getResourcesValue();
 
+    default boolean isDefeated() {
+        return getCurrentHealth() <= 0;
+    }
+
+    default int takeDamage(int damage) {
+        setCurrentHealth(getCurrentHealth() - damage);
+        if (isDefeated()) {
+            return getResourcesValue();
+        }
+        return 0;
+    }
+
 }

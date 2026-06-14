@@ -98,4 +98,30 @@ public abstract class Titan implements Mobil, Attackee, Attacker, Comparable<Tit
     public int compareTo(Titan o) {
         return this.distanceFromBase - o.distanceFromBase;
     }
+
+    @Override
+    public boolean hasReachedTarget() {
+        return Mobil.super.hasReachedTarget();
+    }
+
+    @Override
+    public boolean move() {
+        return Mobil.super.move();
+    }
+
+    @Override
+    public boolean isDefeated() {
+        return Attackee.super.isDefeated();
+    }
+
+    @Override
+    public int takeDamage(int damage) {
+        return Attackee.super.takeDamage(damage);
+    }
+
+    @Override
+    public int attack(Attackee target) {
+        return Attacker.super.attack(target);
+    }
+
 }
