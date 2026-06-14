@@ -26,7 +26,7 @@ public class Wall implements Attackee {
 
     @Override
     public void setCurrentHealth(int health) {
-        currentHealth = health;
+        currentHealth = Math.max(health, 0);
     }
 
     @Override

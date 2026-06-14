@@ -34,7 +34,7 @@ public class Lane implements Comparable<Lane> {
     }
 
     public void setDangerLevel(int dangerLevel) {
-        this.dangerLevel = dangerLevel;
+        this.dangerLevel = Math.max(dangerLevel, 0);
     }
 
     public PriorityQueue<Titan> getTitans() {

@@ -76,17 +76,17 @@ public abstract class Titan implements Mobil, Attackee, Attacker, Comparable<Tit
     // Setter methods
     @Override
     public void setCurrentHealth(int health) {
-        this.currentHealth = health;
+        this.currentHealth = Math.max(health, 0);
     }
 
     @Override
     public void setDistance(int distance) {
-        this.distanceFromBase = distance;
+        this.distanceFromBase = Math.max(distance, 0);
     }
 
     @Override
     public void setSpeed(int speed) {
-        this.speed = speed;
+        this.speed = Math.max(speed, 0);
     }
 
     @Override

@@ -2,6 +2,7 @@ package game.engine.weapons.factory;
 
 import java.io.IOException;
 import java.util.HashMap;
+import game.engine.dataloader.DataLoader;
 import game.engine.weapons.WeaponRegistry;
 
 public class WeaponFactory {
@@ -13,7 +14,13 @@ public class WeaponFactory {
     // Constructor
 
     public WeaponFactory() throws IOException {
-        weaponShop = new HashMap<>();
+        weaponShop = DataLoader.readWeaponRegistry();
+    }
+
+    // Getters
+
+    public HashMap<Integer, WeaponRegistry> getWeaponShop() {
+        return weaponShop;
     }
 
 }

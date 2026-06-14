@@ -62,7 +62,7 @@ public class Battle {
     }
 
     public void setNumberOfTurns(int numberOfTurns) {
-        this.numberOfTurns = numberOfTurns;
+        this.numberOfTurns = Math.max(numberOfTurns, 0);
     }
 
     public int getResourcesGathered() {
@@ -70,7 +70,7 @@ public class Battle {
     }
 
     public void setResourcesGathered(int resourcesGathered) {
-        this.resourcesGathered = resourcesGathered;
+        this.resourcesGathered = Math.max(resourcesGathered, 0);
     }
 
     public BattlePhase getBattlePhase() {
@@ -86,7 +86,7 @@ public class Battle {
     }
 
     public void setNumberOfTitansPerTurn(int numberOfTitansPerTurn) {
-        this.numberOfTitansPerTurn = numberOfTitansPerTurn;
+        this.numberOfTitansPerTurn = Math.max(numberOfTitansPerTurn, 0);
     }
 
     public int getScore() {
@@ -94,7 +94,7 @@ public class Battle {
     }
 
     public void setScore(int score) {
-        this.score = score;
+        this.score = Math.max(score, 0);
     }
 
     public int getTitanSpawnDistance() {
@@ -102,7 +102,7 @@ public class Battle {
     }
 
     public void setTitanSpawnDistance(int titanSpawnDistance) {
-        this.titanSpawnDistance = titanSpawnDistance;
+        this.titanSpawnDistance = Math.max(titanSpawnDistance, 0);
     }
 
     public WeaponFactory getWeaponFactory() {
