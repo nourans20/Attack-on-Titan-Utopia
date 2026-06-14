@@ -150,19 +150,13 @@ public class Battle {
     }
 
     private void addTurnTitansToLane() {
-        ArrayList<Lane> skippedLanes = new ArrayList<Lane>();
         Lane lane = lanes.remove();
-        while (lane.isLaneLost() && !lanes.isEmpty()) {
-            skippedLanes.add(lane);
-            lane = lanes.remove();
-        }
         for (int i = 0; i < numberOfTitansPerTurn; i++) {
             if (approachingTitans.isEmpty())
                 refillApproachingTitans();
             lane.addTitan(approachingTitans.remove(0));
         }
         lanes.add(lane);
-        lanes.addAll(skippedLanes);
     }
 
     private void moveTitans() {
@@ -177,26 +171,31 @@ public class Battle {
 
     private int performWeaponsAttacks() {
         ArrayList<Lane> processedLanes = new ArrayList<Lane>();
-        int resourcesGained = 0;
+        int totalResourcesGained = 0;
         while (!lanes.isEmpty()) {
             Lane lane = lanes.remove();
-            resourcesGained += lane.performLaneWeaponsAttacks();
-            processedLanes.add(lane);
+            int resourcesGained = lane.performLaneWeaponsAttacks();
+            totalResourcesGained += resourcesGained;
+            setResourcesGathered(resourcesGathered + resourcesGained);
+            setScore(score + resourcesGained);
+            if (!lane.isLaneLost())
+                processedLanes.add(lane);
         }
         lanes.addAll(processedLanes);
-        return resourcesGained;
+        return totalResourcesGained;
     }
 
     private int performTitansAttacks() {
         ArrayList<Lane> processedLanes = new ArrayList<Lane>();
-        int resourcesGained = 0;
+        int totalResourcesGained = 0;
         while (!lanes.isEmpty()) {
             Lane lane = lanes.remove();
-            resourcesGained += lane.performLaneTitansAttacks();
-            processedLanes.add(lane);
+            totalResourcesGained += lane.performLaneTitansAttacks();
+            if (!lane.isLaneLost())
+                processedLanes.add(lane);
         }
         lanes.addAll(processedLanes);
-        return resourcesGained;
+        return totalResourcesGained;
     }
 
     private void updateLanesDangerLevels() {
@@ -217,26 +216,22 @@ public class Battle {
             setBattlePhase(BattlePhase.INTENSE);
         else
             setBattlePhase(BattlePhase.GRUMBLING);
-        if (numberOfTurns >= 30 && numberOfTurns % 5 == 0)
+        if (numberOfTurns > 30 && numberOfTurns % 5 == 0)
             setNumberOfTitansPerTurn(numberOfTitansPerTurn * 2);
     }
 
     private void performTurn() {
         moveTitans();
-        int resourcesGained = performWeaponsAttacks();
-        resourcesGained += performTitansAttacks();
-        setResourcesGathered(resourcesGathered + resourcesGained);
-        setScore(score + resourcesGained);
-        addTurnTitansToLane();
+        performWeaponsAttacks();
+        performTitansAttacks();
+        if (!lanes.isEmpty())
+            addTurnTitansToLane();
         updateLanesDangerLevels();
         finalizeTurns();
     }
 
     public boolean isGameOver() {
-        for (Lane lane : lanes)
-            if (!lane.isLaneLost())
-                return false;
-        return true;
+        return lanes.isEmpty();
     }
 
 }
