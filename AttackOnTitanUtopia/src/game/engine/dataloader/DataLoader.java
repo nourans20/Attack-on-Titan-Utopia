@@ -9,8 +9,8 @@ import game.engine.exceptions.InvalidCSVFormat;
 public class DataLoader {
 
     // Attributes - static final (class level, initialized once)
-    public static final String TITANS_FILE_NAME = "titans.csv";
-    public static final String WEAPONS_FILE_NAME = "weapons.csv";
+    private static final String TITANS_FILE_NAME = "titans.csv";
+    private static final String WEAPONS_FILE_NAME = "weapons.csv";
 
     // Reads titans.csv and returns a HashMap of TitanRegistry objects
     public static HashMap<Integer, TitanRegistry> readTitanRegistry() throws IOException {
